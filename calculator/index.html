@@ -5,34 +5,36 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculator App</title>
+    <link rel="stylesheet" href="style.css">
+    <title>Calculator WebApp</title>
 </head>
 
-<body onload="">
-    <input id="txtResult" type="text" readonly="readonly" /><br />
-    <input id="txtInput" type="text" /><br />
-    <button id="btn7">7</button>
-    <button id="btn8">8</button>
-    <button id="btn9">9</button><br />
-    <button id="btn4">4</button>
-
-    <button id="btn5">5</button>
-
-    <button id="btn6">6</button><br />
-
-    <button id="btn1">1</button>
-
-    <button id="btn2">2</button>
-
-    <button id="btn3">3</button><br />
-    <button id="btnClear">C</button>
-    <button id="btn0">0</button>
-
-    <button id="btnClearEntry">CE</button><br />
-    <button id="btnPlus">+</button>
-
-    <button id="btnMinus">-</button>
-    <script src="index.js" type="text/JavaScript"></script>
+<body>
+    <div class="calculator-container">
+        <div class="output">
+            <div class="prior-output">autput</div>
+            <div class="current-output">autput2</div>
+        </div>
+        <button class="span-2">ac</button>
+        <button class="number-and-operators">del</button>
+        <button class="number-and-operators">÷</button>
+        <button class="number-and-operators">1</button>
+        <button class="number-and-operators">2</button>
+        <button class="number-and-operators">3</button>
+        <button class="number-and-operators">+</button>
+        <button class="number-and-operators">4</button>
+        <button class="number-and-operators">5</button>
+        <button class="number-and-operators">6</button>
+        <button class="number-and-operators">-</button>
+        <button class="number-and-operators">7</button>
+        <button class="number-and-operators">8</button>
+        <button class="number-and-operators">9</button>
+        <button class="number-and-operators">*</button>
+        <button class="number-and-operators">,</button>
+        <button class="number-and-operators">0</button>
+        <button class="span-2">=</button>
+    </div>
+    <script src="main.js" type="text/JavaScript"></script>
 </body>
 
 </html>
