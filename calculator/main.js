@@ -21,38 +21,45 @@ class Calculator{
     }
     chooseOperation(operation){
     this.operation = operation;
+    
     if(this.currentOperand.length == 0)return;
 this.currentOperand = this.currentOperand.toString() + this.operation.toString();
-this.previuosOperandTextElement.innerText = this.currentOperand;
+this.previuosOperand = this.currentOperand;
 this.currentOperand = "";
     }
     compute(){
 this.value = this.previuosOperandTextElement.innerText.slice(-1);
-this.currentOperand = parseFloat(this.currentOperand);
-this.previuosOperand = this.previuosOperandTextElement.innerText.slice(0,-1);
+this.currentOperand = Number(this.currentOperand);
+this.previuosOperand = Number(this.previuosOperandTextElement.innerText.slice(0,-1));
 switch (this.value) {
     case "÷":
-        this.currentOperand = this.currentOperand / this.previuosOperand;
-        break;
-
-    case value:
-        break;
-
-    case value:
+        this.currentOperand = this.previuosOperand / this.currentOperand;
         break;
         
-        case value:
-            
+        case "+":
+        this.currentOperand = this.previuosOperand + this.currentOperand;
+
         break;
 
-    default:
+    case "-":
+        this.currentOperand = this.previuosOperand - this.currentOperand;
+
         break;
-}
-console.log(this.value)
+        
+        case "*":
+            this.currentOperand = this.previuosOperand * this.currentOperand;
+            
+            break;
+
+            default:
+                break;
+    }
+    this.previuosOperand = "";
 }
 
 updateDisplay(){
     this.currentOperandTextElement.innerText = this.currentOperand;
+    this.previuosOperandTextElement.innerText = this.previuosOperand;
 }
 }
 const PREVIUOS_OPERAND = document.querySelector('[data-privious]');
@@ -71,6 +78,10 @@ NUMBERS.forEach(element => {
     })
     
 });
+CLEAR_ALL.addEventListener("click",()=>{
+    CALCULATOR.clearAll();
+    CALCULATOR.updateDisplay();
+})
 
 OPERATION_BRNS.forEach(element => {
     element.addEventListener("click", ()=>{
@@ -82,5 +93,4 @@ OPERATION_BRNS.forEach(element => {
 EQUALS_BTN.addEventListener("click", ()=>{
         CALCULATOR.compute()
         CALCULATOR.updateDisplay();
-        CALCULATOR.clearAll()
     })
