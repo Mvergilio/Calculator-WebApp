@@ -1,3 +1,4 @@
+
 class Calculator {
     constructor(currentOperandTextElement, previuosOperandTextElement) {
         this.currentOperandTextElement = currentOperandTextElement;
@@ -23,7 +24,7 @@ class Calculator {
 
     chooseOperation(operation) {
 
-        if (this.currentOperand !== '') return;
+        if (this.currentOperand == '') return;
         if (this.previuosOperand !== '') {
             this.compute();
         }
@@ -32,13 +33,28 @@ class Calculator {
         this.currentOperand = "";
     }
 
+    appedComma(number) {
+        const integerPart = parseFloat(number.toString().split('.')[0]);
+        const floatPart = number.toString().split('.')[1];
+        let integerDisplay;
+        if (isNaN(integerPart)) {
+            integerDisplay = "";
+        } else {
+            integerDisplay = integerPart.toLocaleString('en',
+                { maximumFractionDigits: 0 });
+        }
+        if (floatPart != null) {
+            return `${integerDisplay}.${floatPart}`
+        } else {
+            return integerDisplay;
+        }
 
+    }
 
     compute() {
         let computation;
         const prev = parseFloat(this.previuosOperand);
         const current = parseFloat(this.currentOperand);
-        console.log(this.operation)
         if (isNaN(prev) || isNaN(current)) return;
         switch (this.operation) {
             case "÷":
@@ -63,15 +79,20 @@ class Calculator {
 
         }
         this.currentOperand = computation;
-        this.operation = undefined;
+        this.operation = null;
         this.previuosOperand = "";
-
 
     }
 
     updateDisplay() {
-        this.currentOperandTextElement.innerText = this.currentOperand;
-        this.previuosOperandTextElement.innerText = this.previuosOperand;
+        this.currentOperandTextElement.innerText = this.appedComma(this.currentOperand);
+        if (this.operation) {
+            this.previuosOperandTextElement.innerText =
+                `${this.appedComma(this.previuosOperand)} ${this.operation} `
+
+        } else {
+            this.previuosOperandTextElement.innerText = this.appedComma(this.previuosOperand);
+        }
     }
 }
 const PREVIUOS_OPERAND = document.querySelector('[data-privious]');
@@ -81,7 +102,6 @@ const CLEAR_ALL = document.querySelector('[data-clear]')
 const DELETE_OPERAND = document.querySelector('[data-delete]');
 const OPERATION_BRNS = document.querySelectorAll('[data-oparation]')
 const EQUALS_BTN = document.querySelector('[data-equals]');
-// console.log(EQUALS_BTN)
 const CALCULATOR = new Calculator(CURRENT_OPERAND, PREVIUOS_OPERAND)
 NUMBERS.forEach(element => {
     element.addEventListener("click", () => {
@@ -103,7 +123,6 @@ DELETE_OPERAND.addEventListener("click", () => {
 OPERATION_BRNS.forEach(element => {
     element.addEventListener("click", () => {
         CALCULATOR.chooseOperation(element.innerText)
-        console.log(element.innerText)
         CALCULATOR.updateDisplay();
     })
 

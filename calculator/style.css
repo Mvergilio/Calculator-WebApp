@@ -38,6 +38,7 @@ body {
 .output{
     grid-column: 1/-1;
     background-color: aqua;
+    border-radius: 10px;
 }
 
 .prior-output, .current-output{
